@@ -27,5 +27,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Weeks 13 and 14 use three slices of potato. Serve with a cup of infusion and
+Week 13 uses three slices of potato. Serve with a cup of infusion and
 the juice of a lemon.

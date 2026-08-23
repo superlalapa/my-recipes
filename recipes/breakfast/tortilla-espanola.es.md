@@ -27,5 +27,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-En las semanas 13 y 14 son 3 rodajas de papa. Acompaña con 1 taza de infusión
+En la semana 13 son 3 rodajas de papa. Acompaña con 1 taza de infusión
 y zumo de limón.

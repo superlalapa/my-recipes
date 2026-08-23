@@ -24,4 +24,4 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Weeks 3, 9, 12 and 14. Serve with a cup of infusion and lemon juice.
+Weeks 4, 9, 10, 12 and 14. Serve with a cup of infusion and lemon juice.

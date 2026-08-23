@@ -18,6 +18,7 @@ sourceName: Libia Pava meal plan
 - 1 tomato, cut into wedges
 - 1 red pepper, sliced
 - 1 tbsp oil
+- 1/4 avocado
 - 1 pinch salt
 
 ## Method
@@ -26,7 +27,7 @@ sourceName: Libia Pava meal plan
 2. Add the oil and the meat in a single layer. Leave it to colour for 2 minutes before stirring.
 3. Add the onion and pepper and toss for 2 minutes — they should stay crunchy.
 4. Add the tomato last and toss for 1 minute.
-5. Season and serve over the rice.
+5. Season and serve over the rice, with the avocado alongside.
 
 ## Notes
 

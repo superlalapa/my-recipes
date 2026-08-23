@@ -23,4 +23,4 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-En las semanas 13 y 14 la granola sube a 50 g.
+En la semana 13 se sirven además 50 g de granola sola como snack de la tarde.

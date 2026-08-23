@@ -15,7 +15,7 @@ sourceName: Plan de alimentación de Libia Pava
 - 1/2 pimiento picado
 - 1/2 cebolla en juliana
 - 2 limones (el zumo)
-- 1 tajada de mango en cubos
+- 1 tajada de mango en cubos (opcional)
 - 2 rodajas de camote
 
 ## Preparación
@@ -27,5 +27,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Almuerzo de la semana 3. Los langostinos ya están cocidos: el limón es para
+Almuerzo de la semana 4. Los langostinos ya están cocidos: el limón es para
 dar sabor, no para cocinarlos.

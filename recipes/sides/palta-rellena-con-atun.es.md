@@ -24,4 +24,4 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Semanas 3, 9, 12 y 14. Se sirve con 1 taza de infusión y zumo de limón.
+Semanas 4, 9, 10, 12 y 14. Se sirve con 1 taza de infusión y zumo de limón.

@@ -15,7 +15,7 @@ sourceName: Libia Pava meal plan
 - 1/2 cup pasta
 - 2 handfuls spinach
 - 1/2 avocado
-- 1/2 courgette, cut into ribbons
+- 1/2 cup courgette, cut into ribbons or grated
 - 1 cup mushrooms, sliced
 - 1 tomato, diced
 - 30 g fresh cheese

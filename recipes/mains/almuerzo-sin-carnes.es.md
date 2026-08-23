@@ -26,4 +26,4 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Aparece en las semanas 3, 9 y 12. Con un vaso de limonada al lado.
+Aparece en las semanas 4, 9, 10 y 12. Con un vaso de limonada al lado.

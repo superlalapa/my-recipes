@@ -27,4 +27,4 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Week 3 dinner. Roasting the rounds first is what stops the pizzas going soggy.
+Weeks 4 and 10 dinner. Roasting the rounds first is what stops the pizzas going soggy.

@@ -27,4 +27,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Weeks 3, 4, 12 and 13. Week 13 adds three slices of oven-baked potato.
+Weeks 3, 11, 12, 13 and 14. Week 13 adds three slices of oven-baked potato;
+week 14 serves 120 g as a lunch.

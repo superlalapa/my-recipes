@@ -1,6 +1,6 @@
 ---
 title: "Chicken or Prawn Green Salad"
-description: "The plan's default dinner salad, repeated across five of the eight weeks."
+description: "The plan's default dinner salad, repeated across six of the eight weeks."
 date: 2026-08-23
 servings: 1
 prep: 10 min
@@ -27,5 +27,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-The quinoa is a weeks 13–14 addition; earlier weeks leave it out. Rinse tinned
+The quinoa is a week 13 addition; earlier weeks leave it out. Rinse tinned
 sweetcorn well.

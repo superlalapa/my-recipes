@@ -8,7 +8,7 @@ cook: 15 min
 total: 20 min
 calories: "≈230"
 protein: "27 g"
-tags: [sopa, sopa-verde, alto-en-proteina, bajo-en-carbohidratos]
+tags: [sopa, sopa-verde, alto-en-proteina, bajo-en-carbohidratos, plan-body-reset]
 sourceName: The Body Reset Diet
 ---
 

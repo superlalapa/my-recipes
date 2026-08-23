@@ -27,5 +27,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Swap the egg for 120 g of grilled chicken or minced beef, as weeks 11 and 13
-do. Leftover beans from the day before are the point.
+Weeks 13 and 14 swap the egg for 120 g of minced beef; week 3 uses 120 g of
+grilled chicken. Leftover beans from the day before are the point.

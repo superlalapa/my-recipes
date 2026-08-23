@@ -27,5 +27,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Cena de la semana 3. Asarlas primero es lo que evita que la pizza quede
+Cena de las semanas 4 y 10. Asarlas primero es lo que evita que la pizza quede
 aguada.

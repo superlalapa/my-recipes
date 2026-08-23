@@ -26,4 +26,4 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Appears in weeks 3, 9 and 12. A glass of lemonade alongside.
+Appears in weeks 4, 9, 10 and 12. A glass of lemonade alongside.

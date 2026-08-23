@@ -27,5 +27,6 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Cambia el huevo por 120 g de pollo a la plancha o carne molida, como en las
-semanas 11 y 13. La gracia es aprovechar los frijoles del día anterior.
+En las semanas 13 y 14 el huevo se cambia por 120 g de carne molida; en la
+semana 3, por 120 g de pollo a la plancha. La gracia es aprovechar los
+frijoles del día anterior.

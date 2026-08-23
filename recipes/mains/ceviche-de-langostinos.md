@@ -15,7 +15,7 @@ sourceName: Libia Pava meal plan
 - 1/2 red pepper, diced
 - 1/2 onion, finely sliced
 - 2 limes, juiced
-- 1 slice mango, diced
+- 1 slice mango, diced (optional)
 - 2 slices sweet potato
 
 ## Method
@@ -27,5 +27,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Week 3 lunch. The prawns are already cooked — the lime is for flavour, not for
+Week 4 lunch. The prawns are already cooked — the lime is for flavour, not for
 curing.

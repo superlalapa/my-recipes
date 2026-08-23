@@ -18,6 +18,7 @@ sourceName: Plan de alimentación de Libia Pava
 - 1 tomate en gajos
 - 1 pimiento en tiras
 - 1 cda de aceite
+- 1/4 de palta
 - 1 pizca de sal
 
 ## Preparación
@@ -26,7 +27,7 @@ sourceName: Plan de alimentación de Libia Pava
 2. Añade el aceite y la carne en una sola capa. Déjala dorar 2 minutos antes de remover.
 3. Incorpora la cebolla y el pimiento y saltea 2 minutos: deben quedar crujientes.
 4. Añade el tomate al final y saltea 1 minuto.
-5. Sazona y sirve sobre el arroz.
+5. Sazona y sirve sobre el arroz, con la palta al lado.
 
 ## Notas
 

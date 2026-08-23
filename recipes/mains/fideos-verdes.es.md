@@ -15,7 +15,7 @@ sourceName: Plan de alimentación de Libia Pava
 - 1/2 taza de fideos
 - 2 puñados de espinaca
 - 1/2 palta
-- 1/2 calabacín en tiras
+- 1/2 taza de calabacín en tiras o rallado
 - 1 taza de champiñones en láminas
 - 1 tomate picado
 - 30 g de queso fresco

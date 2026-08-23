@@ -1,6 +1,6 @@
 ---
 title: "Ensalada de pollo o langostinos"
-description: "La ensalada de cena por defecto del plan, en cinco de las ocho semanas."
+description: "La ensalada de cena por defecto del plan, en seis de las ocho semanas."
 date: 2026-08-23
 servings: 1
 prep: 10 min
@@ -27,5 +27,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-La quinua se añade en las semanas 13–14; antes no aparece. Lava bien el maíz
+La quinua se añade en la semana 13; antes no aparece. Lava bien el maíz
 de lata.

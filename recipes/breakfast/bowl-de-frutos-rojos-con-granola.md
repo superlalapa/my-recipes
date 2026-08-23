@@ -23,4 +23,4 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Weeks 13 and 14 raise the granola to 50 g.
+Week 13 also serves 50 g of granola on its own as an afternoon snack.

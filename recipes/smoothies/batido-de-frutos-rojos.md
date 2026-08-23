@@ -22,5 +22,5 @@ sourceName: Libia Pava meal plan
 
 ## Notes
 
-Appears in six of the eight weeks. The protein powder is an alternative to the
+Appears in seven of the eight weeks — every week except week 9. The protein powder is an alternative to the
 milk in some weeks, not always an addition.

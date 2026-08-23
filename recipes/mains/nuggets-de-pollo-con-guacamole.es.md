@@ -27,4 +27,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Semanas 3, 4, 12 y 13. En la semana 13 se añaden 3 rodajas de papa al horno.
+Semanas 3, 11, 12, 13 y 14. En la semana 13 se añaden 3 rodajas de papa al
+horno; en la 14 se sirven 120 g como almuerzo.

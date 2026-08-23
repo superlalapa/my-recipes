@@ -22,5 +22,5 @@ sourceName: Plan de alimentación de Libia Pava
 
 ## Notas
 
-Aparece en seis de las ocho semanas. En algunas la proteína sustituye a la
+Aparece en siete de las ocho semanas: todas menos la 9. En algunas la proteína sustituye a la
 leche en lugar de sumarse.

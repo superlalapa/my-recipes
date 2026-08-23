@@ -8,7 +8,7 @@ cook: 15 min
 total: 20 min
 calories: "300"
 protein: "36 g"
-tags: [sopa, sopa-verde, alto-en-proteina, bajo-en-carbohidratos]
+tags: [sopa, sopa-verde, espinaca, coliflor, alto-en-proteina, bajo-en-carbohidratos, plan-body-reset]
 sourceName: The Body Reset Diet
 ---
 
@@ -38,4 +38,5 @@ La hoja original pone «2/4 de taza» de coliflor, escrito aquí como 1/2 taza.
 Las otras sopas verdes llevan de 1,5 a 2,5 tazas de verdura, así que
 probablemente sea una errata: añade más si la sopa queda ligera. La línea de
 especias dice «1/2 cucharadita de comino, cúrcuma, pimentón», entendido aquí
-como 1/2 cdita entre las tres.
+como 1/2 cdita entre las tres. Usa 1/2 cdita de cada una si la quieres más
+intensa.
