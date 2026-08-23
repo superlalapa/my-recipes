@@ -59,8 +59,10 @@ const sample = spanish
   : ["- 1 thing", "- 200 g another thing", "1. Do the first thing.", "2. Then the next thing.",
      "Anything worth remembering next time."];
 
+// JSON string syntax is valid YAML flow scalar syntax, so a title
+// containing `:`, `#`, or quotes still parses.
 const template = `---
-title: ${title}
+title: ${JSON.stringify(title)}
 description:
 date: ${today}
 servings: 4

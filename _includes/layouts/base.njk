@@ -25,15 +25,16 @@
 <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="{{ t.siteTitle }}">
-<link rel="manifest" href="/manifest.webmanifest">
+<link rel="manifest" href="{{ t.home }}manifest.webmanifest">
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/icon-180.png">
 <link rel="canonical" href="{{ site.origin }}{{ page.url | url }}">
 {% if altReal %}<link rel="alternate" hreflang="{{ t.code }}" href="{{ site.origin }}{{ page.url | url }}">
 <link rel="alternate" hreflang="{{ other.code }}" href="{{ site.origin }}{{ switchUrl | url }}">
-<link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ (page.url if t.code == i18n.list[0].code else switchUrl) | url }}">{% endif %}
+<link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ (page.url if t.code == i18n.list[0].code else switchUrl) | url }}">
+<meta property="og:locale:alternate" content="{{ other.ogLocale }}">{% endif %}
 <meta property="og:site_name" content="{{ t.siteTitle }}">
-<meta property="og:locale" content="{{ t.code }}">
+<meta property="og:locale" content="{{ t.ogLocale }}">
 <meta property="og:type" content="{% if category %}article{% else %}website{% endif %}">
 <meta property="og:title" content="{{ title or t.siteTitle }}">
 <meta property="og:description" content="{{ description or t.siteDescription }}">
@@ -57,13 +58,13 @@ window.SEARCH_INDEX = {{ (((t.home + "search-index.json") | url) + "?v=" + build
   </a>
   <div class="topbar-actions">
     <a class="lang-btn" href="{{ switchUrl }}" lang="{{ other.htmlLang }}" hreflang="{{ other.code }}">{{ other.code | upper }}</a>
-    <button type="button" class="icon-btn" data-search-open aria-label="{{ t.searchOpen }}">
+    <button type="button" class="icon-btn" data-search-open aria-label="{{ t.searchOpen }}" aria-haspopup="dialog" aria-expanded="false">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
     </button>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   {{ content | safe }}
 </main>
 
@@ -85,7 +86,8 @@ window.SEARCH_INDEX = {{ (((t.home + "search-index.json") | url) + "?v=" + build
       <button type="button" class="text-btn" data-search-close>{{ t.searchClose }}</button>
     </div>
     <ul class="search-results" data-search-results></ul>
-    <p class="search-empty" data-search-empty hidden>{{ t.searchEmpty }}</p>
+    <p class="search-empty" data-search-empty role="status" hidden>{{ t.searchEmpty }}</p>
+    <p class="vh" data-search-status role="status" aria-live="polite"></p>
   </div>
 </div>
 

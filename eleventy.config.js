@@ -146,8 +146,10 @@ export default function (eleventyConfig) {
       }
     }
 
+    // null, not the other language's home: base.njk only claims an hreflang
+    // alternate when a genuine counterpart page exists.
     for (const entry of entries) {
-      entry.altUrl = urlBySlug[entry.slug]?.[otherLang(entry.lang)] || localeHome(otherLang(entry.lang));
+      entry.altUrl = urlBySlug[entry.slug]?.[otherLang(entry.lang)] || null;
     }
     return entries.sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
   });
@@ -185,7 +187,7 @@ export default function (eleventyConfig) {
     }
 
     for (const entry of entries) {
-      entry.altUrl = urlBySlug[entry.slug]?.[otherLang(entry.lang)] || localeHome(otherLang(entry.lang));
+      entry.altUrl = urlBySlug[entry.slug]?.[otherLang(entry.lang)] || null;
     }
     return entries.sort(
       (a, b) => a.lang.localeCompare(b.lang) || b.count - a.count || a.name.localeCompare(b.name)

@@ -1,19 +1,25 @@
 ---
-permalink: /manifest.webmanifest
+pagination:
+  data: i18n.list
+  size: 1
+  alias: loc
+permalink: "{{ loc.home }}manifest.webmanifest"
 eleventyExcludeFromCollections: true
 ---
 {
-  "name": {{ i18n.strings.en.siteTitle | jsonify | safe }},
-  "short_name": {{ i18n.strings.en.siteTitle | jsonify | safe }},
-  "description": {{ i18n.strings.en.siteDescription | jsonify | safe }},
-  "start_url": {{ ('/' | url) | jsonify | safe }},
-  "scope": {{ ('/' | url) | jsonify | safe }},
+  "name": {{ loc.siteTitle | jsonify | safe }},
+  "short_name": {{ loc.shortName | jsonify | safe }},
+  "description": {{ loc.siteDescription | jsonify | safe }},
+  "lang": {{ loc.htmlLang | jsonify | safe }},
+  "dir": "ltr",
+  "start_url": {{ (loc.home | url) | jsonify | safe }},
+  "scope": {{ ("/" | url) | jsonify | safe }},
   "display": "standalone",
   "background_color": "#faf6ef",
   "theme_color": "#faf6ef",
   "icons": [
-    { "src": {{ ('/assets/icon-192.png' | url) | jsonify | safe }}, "sizes": "192x192", "type": "image/png" },
-    { "src": {{ ('/assets/icon-512.png' | url) | jsonify | safe }}, "sizes": "512x512", "type": "image/png" },
-    { "src": {{ ('/assets/icon-512.png' | url) | jsonify | safe }}, "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": {{ ("/assets/icon-192.png" | url) | jsonify | safe }}, "sizes": "192x192", "type": "image/png" },
+    { "src": {{ ("/assets/icon-512.png" | url) | jsonify | safe }}, "sizes": "512x512", "type": "image/png" },
+    { "src": {{ ("/assets/icon-512.png" | url) | jsonify | safe }}, "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

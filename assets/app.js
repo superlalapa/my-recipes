@@ -18,9 +18,14 @@
     const loadIndex = () => {
       if (!loading) {
         loading = fetch(window.SEARCH_INDEX || url("search-index.json"))
-          .then((r) => (r.ok ? r.json() : []))
+          .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
           .then((data) => (index = data))
-          .catch(() => (index = []));
+          .catch(() => {
+            // Drop the memo so the next keystroke retries instead of the
+            // search staying permanently empty after one flaky request.
+            loading = null;
+            index = null;
+          });
       }
       return loading;
     };
@@ -30,14 +35,23 @@
         ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
       );
 
+    // Mark in ONE pass over the raw text using control-character sentinels,
+    // then escape, then swap the sentinels for tags. Escaping first and looping
+    // per term makes later terms match the &amp;/<mark> markup already inserted.
+    const OPEN = "\u0001";
+    const CLOSE = "\u0002";
+
     const highlight = (text, terms) => {
-      let out = escapeHtml(text);
-      for (const term of terms) {
-        if (term.length < 2) continue;
-        const safe = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        out = out.replace(new RegExp(`(${safe})`, "ig"), "<mark>$1</mark>");
+      const useful = terms
+        .filter((t) => t.length >= 2)
+        .sort((a, b) => b.length - a.length)
+        .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+
+      let marked = String(text);
+      if (useful.length) {
+        marked = marked.replace(new RegExp(`(${useful.join("|")})`, "ig"), `${OPEN}$1${CLOSE}`);
       }
-      return out;
+      return escapeHtml(marked).split(OPEN).join("<mark>").split(CLOSE).join("</mark>");
     };
 
     // Every term must appear somewhere; title and tag hits rank above body hits.
@@ -61,11 +75,19 @@
       return total;
     };
 
+    const status = layer.querySelector("[data-search-status]");
+
     const render = (query) => {
       const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
       list.innerHTML = "";
 
       if (!terms.length) {
+        empty.hidden = true;
+        if (status) status.textContent = "";
+        return;
+      }
+
+      if (index === null) {
         empty.hidden = true;
         return;
       }
@@ -77,6 +99,7 @@
         .slice(0, 30);
 
       empty.hidden = hits.length > 0;
+      if (status) status.textContent = String(hits.length);
 
       const frag = document.createDocumentFragment();
       for (const { entry } of hits) {
@@ -94,10 +117,18 @@
       list.appendChild(frag);
     };
 
+    const behind = () =>
+      document.querySelectorAll("body > header, body > main, body > footer");
+    const triggers = () => document.querySelectorAll("[data-search-open]");
+
     const open = () => {
       lastFocus = document.activeElement;
       layer.hidden = false;
       document.body.classList.add("search-open");
+      // Real modality: everything behind the dialog leaves the a11y tree and
+      // the tab order, which is what aria-modal promises.
+      behind().forEach((el) => (el.inert = true));
+      triggers().forEach((b) => b.setAttribute("aria-expanded", "true"));
       input.focus();
       input.select();
       loadIndex().then(() => render(input.value));
@@ -106,6 +137,8 @@
     const close = () => {
       layer.hidden = true;
       document.body.classList.remove("search-open");
+      behind().forEach((el) => (el.inert = false));
+      triggers().forEach((b) => b.setAttribute("aria-expanded", "false"));
       if (lastFocus instanceof HTMLElement) lastFocus.focus();
     };
 
@@ -202,6 +235,7 @@
 
   function makeChecklist(ul) {
     ul.classList.add("checklist");
+    ul.setAttribute("role", "list");
     for (const li of [...ul.children]) {
       if (li.tagName !== "LI") continue;
       const label = document.createElement("label");
@@ -222,6 +256,7 @@
 
   function makeSteps(list) {
     list.classList.add("steps");
+    list.setAttribute("role", "list");
     let n = 0;
     for (const li of [...list.children]) {
       if (li.tagName !== "LI") continue;
@@ -232,7 +267,6 @@
 
       const num = document.createElement("span");
       num.className = "step-n";
-      num.setAttribute("aria-hidden", "true");
       num.textContent = String(n);
 
       const text = document.createElement("span");
@@ -295,7 +329,7 @@
 
     const formatQty = (n) => {
       if (!isFinite(n) || n <= 0) return "0";
-      if (n >= 1000) return Math.round(n).toLocaleString("en-US");
+      if (n >= 1000) return Math.round(n).toLocaleString(window.SITE_LANG === "es" ? "es-ES" : "en-US");
       const whole = Math.floor(n + 1e-9);
       const rest = n - whole;
       for (const [value, glyph] of NICE) {
@@ -319,7 +353,9 @@
       if (factor === 1) return;
 
       const walker = document.createTreeWalker(span, NodeFilter.SHOW_TEXT);
-      const node = walker.nextNode();
+      let node = walker.nextNode();
+      // Loose lists wrap each item in <p>, putting a whitespace-only node first.
+      while (node && !node.nodeValue.trim()) node = walker.nextNode();
       if (!node) return;
       const match = node.nodeValue.match(QTY);
       if (!match || !match[2]) return;
@@ -364,9 +400,19 @@
     const setPressed = (on) => wakeBtn.setAttribute("aria-pressed", on ? "true" : "false");
 
     const acquire = async () => {
+      if (lock) return;
       try {
-        lock = await navigator.wakeLock.request("screen");
-        lock.addEventListener("release", () => setPressed(false));
+        const sentinel = await navigator.wakeLock.request("screen");
+        // Intent can flip while the request is in flight.
+        if (!wanted) {
+          sentinel.release().catch(() => {});
+          return;
+        }
+        lock = sentinel;
+        lock.addEventListener("release", () => {
+          lock = null;
+          setPressed(false);
+        });
         setPressed(true);
       } catch {
         wanted = false;

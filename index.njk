@@ -17,7 +17,7 @@ eleventyComputed:
   <section class="hero">
     <h1>{{ t.siteTitle }}</h1>
     <p class="lede">{{ t.tagline }}</p>
-    <button type="button" class="fakefield" data-search-open>
+    <button type="button" class="fakefield" data-search-open aria-haspopup="dialog" aria-expanded="false">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
       {{ t.searchCta | fill(recipes | length) }}
     </button>

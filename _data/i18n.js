@@ -9,6 +9,8 @@ const en = {
   name: "English",
   home: "/",
   htmlLang: "en",
+  ogLocale: "en_US",
+  shortName: "Recipes",
 
   siteTitle: "Superlalapa's Recipes",
   tagline: "The ones worth cooking twice.",
@@ -82,6 +84,8 @@ const es = {
   name: "Español",
   home: "/es/",
   htmlLang: "es",
+  ogLocale: "es_ES",
+  shortName: "Recetas",
 
   siteTitle: "Las recetas de Superlalapa",
   tagline: "Las que vale la pena cocinar dos veces.",
