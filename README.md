@@ -1,9 +1,14 @@
-# My Recipes
+# Superlalapa's Recipes
 
-A personal recipe collection. Drop a Markdown file into a folder under
-`recipes/`, push, and it's on your phone a minute later.
+A personal recipe collection in **English and Spanish**. Drop a Markdown file
+into a folder under `recipes/`, push, and it's on your phone a minute later.
 
-**Live site:** https://superlalapa.github.io/my-recipes/
+**Live site:** https://superlalapa.github.io/my-recipes/ · [Español](https://superlalapa.github.io/my-recipes/es/)
+
+The site is marked `noindex` and ships a `robots.txt` that disallows crawling.
+(On a GitHub Pages *project* site only the domain root's `robots.txt` is
+honoured, so the `noindex` meta tag on every page is what actually does the
+work.)
 
 ---
 
@@ -26,9 +31,12 @@ bottom, which is the fastest way to fix a quantity while you're cooking.
 npm run new -- "Thai Green Curry" mains
 ```
 
-That creates `recipes/mains/thai-green-curry.md` from a template and tells you
-the URL it will publish at. The category argument is optional and defaults to
-`mains`.
+That creates `recipes/mains/thai-green-curry.md` from a template. Add `--es`
+for the Spanish counterpart:
+
+```bash
+npm run new -- "Curry verde tailandés" mains --es
+```
 
 ---
 
@@ -47,10 +55,12 @@ prep: 15 min
 cook: 20 min
 total: 35 min
 difficulty: Easy
+calories: "320"
+protein: 27 g
 tags: [thai, spicy, weeknight]
 image: curry.jpg          # optional, sits next to the .md file
-source: https://…         # optional
-sourceName: Bon Appétit   # optional label for that link
+source: https://…         # optional, rendered as a link
+sourceName: Bon Appétit   # optional; used alone if there's no URL
 draft: true               # optional, keeps it off the site
 ---
 
@@ -71,11 +81,36 @@ Anything worth remembering next time.
 
 The body is plain Markdown — no template syntax to escape.
 
-A heading containing **"Ingredients"** turns the list under it into tickable
-checkboxes. A heading containing **"Method"**, **"Steps"**, **"Instructions"**
-or **"Directions"** turns its list into numbered, tickable steps. If you skip
-the headings entirely, the first bullet list and first numbered list are used
-instead.
+A heading containing **Ingredients / Ingredientes** turns the list under it
+into tickable checkboxes. A heading containing **Method, Steps, Instructions,
+Directions / Preparación, Elaboración, Pasos, Instrucciones** turns its list
+into numbered, tickable steps. If a recipe has no headings at all, the first
+bullet list and first numbered list are used instead — but if it *does* have
+headings, nothing is guessed, so a list under "Notes" is left alone.
+
+---
+
+## Two languages
+
+**The filename carries the language.** English is the default and lives at the
+root; Spanish gets a `.es` suffix and a `/es/` URL:
+
+```
+recipes/mains/arroz-tapado.md      →  /recipes/mains/arroz-tapado/
+recipes/mains/arroz-tapado.es.md   →  /es/recipes/mains/arroz-tapado/
+```
+
+The two files are linked automatically by their shared filename stem, so the
+language switch button in the header goes straight to the counterpart.
+
+A recipe with no translation still appears in **both** language listings — the
+entry links to whichever version exists and carries a small `EN` / `ES` badge.
+So you can add the translation later without leaving a hole in the site.
+
+Interface strings, category names and both search indexes live in
+[`_data/i18n.js`](_data/i18n.js). To add a language, add one entry there —
+`LANGS`, the URL prefixes, the search indexes and the service worker precache
+list are all derived from it.
 
 ---
 
@@ -85,41 +120,33 @@ instead.
 
 ```
 recipes/
-├── breakfast/
-│   └── shakshuka.md          →  /recipes/breakfast/shakshuka/
-├── mains/
-│   └── thai-green-curry.md
-├── sides/
-└── desserts/
+├── breakfast/    desserts/     mains/      sauces/
+├── sides/        smoothies/    snacks/     soups/     drinks/
 ```
 
-Create a new folder and it appears on the home page on the next build, with
-its name title-cased and a matching emoji picked automatically.
+Create a new folder and it appears on both home pages on the next build, with
+its name title-cased and an emoji picked automatically. To control the display
+name and icon, add the folder slug to the `categories` map of **each** language
+in [`_data/i18n.js`](_data/i18n.js):
 
-To override either, drop a data file in the folder named after the folder —
-e.g. `recipes/sides/sides.11tydata.json`:
-
-```json
-{
-  "categoryName": "Sides & Salads",
-  "categoryIcon": "🥗"
-}
+```js
+categories: { sides: "Sides & Salads", … }   // en
+categories: { sides: "Guarniciones y ensaladas", … }   // es
 ```
 
 ### Photos
 
-Put the image file next to the recipe and reference it by filename:
+Put the image file next to the recipe and reference it by filename. Both
+language versions share the one photo:
 
 ```
-recipes/mains/thai-green-curry.md
-recipes/mains/curry.jpg          →  image: curry.jpg
+recipes/mains/arroz-tapado.md      →  image: arroz.jpg
+recipes/mains/arroz.jpg
 ```
 
 ---
 
 ## On your phone
-
-The site is built mobile-first. A few things worth knowing:
 
 | Feature | What it does |
 | --- | --- |
@@ -127,8 +154,8 @@ The site is built mobile-first. A few things worth knowing:
 | **Works offline** | A service worker caches pages you've visited, so a recipe you opened earlier still loads with no signal. |
 | **Keep screen on** | Button on every recipe. Stops the screen dimming mid-method. (Chrome/Edge/Android and Safari 16.4+.) |
 | **Scale** | `−` / `+` rescales every ingredient quantity, from ½× to 4×. Handles fractions — `1/2 tsp` at 1.5× becomes `¾ tsp`. |
-| **Tick as you go** | Tap ingredients and steps to cross them off. Remembered per recipe, even if you close the tab. |
-| **Search** | Searches titles, descriptions, tags **and ingredients** — so "what can I do with lemons" works. |
+| **Tick as you go** | Tap ingredients and steps to cross them off. Remembered per recipe, keyed on the item's text so editing the recipe doesn't scramble your ticks. |
+| **Search** | Searches titles, descriptions, tags **and ingredients**, in the language you're browsing. |
 | **Dark mode** | Follows your phone's setting. |
 
 ---
@@ -164,9 +191,9 @@ it in as `PATH_PREFIX`, so all links work under `/my-recipes/`. If you ever
 rename the repo — or move it to `superlalapa.github.io` — the links follow
 automatically, no edits needed.
 
-Pages needs to be set to **Build and deployment → Source: GitHub Actions**. The
-workflow attempts to set that itself on the first run; if it doesn't take, set
-it by hand in **Settings → Pages**.
+Pages must be set to **Settings → Pages → Build and deployment → Source:
+GitHub Actions**. The workflow cannot turn that on for you; `GITHUB_TOKEN`
+isn't allowed to create a Pages site.
 
 ---
 
@@ -174,12 +201,13 @@ it by hand in **Settings → Pages**.
 
 ```
 recipes/            your recipes — the only folder you normally touch
+_data/i18n.js       every interface string, in both languages
+_data/site.js       deploy identity (origin, repo) only
 _includes/layouts/  page templates
-_data/site.js       site title, tagline, description
 assets/             stylesheet, client-side JS, icons
-lib/util.js         category naming helpers
+lib/util.js         language + category helpers
 scripts/            new-recipe scaffold, icon generator
-eleventy.config.js  build config
+eleventy.config.js  build config and collections
 ```
 
 Built with [Eleventy](https://www.11ty.dev/). One dependency, no framework.
