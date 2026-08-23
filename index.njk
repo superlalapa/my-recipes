@@ -8,6 +8,7 @@ layout: layouts/base.njk
 eleventyExcludeFromCollections: true
 eleventyComputed:
   lang: "{{ loc.code }}"
+  altUrl: "{{ i18n.strings[loc.other].home }}"
 ---
 {% set t = loc %}
 {% set recipes = collections.localeRecipes[t.code] %}

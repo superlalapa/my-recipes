@@ -1,10 +1,15 @@
 {% set t = i18n.strings[lang or "en"] %}
 {% set other = i18n.strings[t.other] %}
 {%- set switchUrl = other.home -%}
+{#- altReal distinguishes a genuine counterpart page from a fallback to the
+    other language's home, so hreflang is only claimed when it is reciprocal. -#}
+{%- set altReal = false -%}
 {%- if translationKey and collections.translations[translationKey] and collections.translations[translationKey][t.other] -%}
   {%- set switchUrl = collections.translations[translationKey][t.other] -%}
+  {%- set altReal = true -%}
 {%- elif altUrl -%}
   {%- set switchUrl = altUrl -%}
+  {%- set altReal = true -%}
 {%- endif -%}
 <!doctype html>
 <html lang="{{ t.htmlLang }}">
@@ -24,25 +29,26 @@
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/icon-180.png">
 <link rel="canonical" href="{{ site.origin }}{{ page.url | url }}">
-<link rel="alternate" hreflang="{{ t.code }}" href="{{ site.origin }}{{ page.url | url }}">
+{% if altReal %}<link rel="alternate" hreflang="{{ t.code }}" href="{{ site.origin }}{{ page.url | url }}">
 <link rel="alternate" hreflang="{{ other.code }}" href="{{ site.origin }}{{ switchUrl | url }}">
+<link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ (page.url if t.code == i18n.list[0].code else switchUrl) | url }}">{% endif %}
 <meta property="og:site_name" content="{{ t.siteTitle }}">
 <meta property="og:locale" content="{{ t.code }}">
 <meta property="og:type" content="{% if category %}article{% else %}website{% endif %}">
 <meta property="og:title" content="{{ title or t.siteTitle }}">
 <meta property="og:description" content="{{ description or t.siteDescription }}">
 <meta property="og:url" content="{{ site.origin }}{{ page.url | url }}">
-{% if imageUrl %}<meta property="og:image" content="{{ site.origin }}{{ imageUrl | url }}">{% endif %}
+{% if imageUrl %}<meta property="og:image" content="{% if "//" in imageUrl %}{{ imageUrl }}{% else %}{{ site.origin }}{{ imageUrl | url }}{% endif %}">{% endif %}
 <meta name="twitter:card" content="{% if imageUrl %}summary_large_image{% else %}summary{% endif %}">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v={{ build.stamp }}">
 <script>
 window.SITE_BASE = {{ ("/" | url) | jsonify | safe }};
 window.SITE_LANG = {{ t.code | jsonify | safe }};
-window.SEARCH_INDEX = {{ ((t.home + "search-index.json") | url) | jsonify | safe }};
+window.SEARCH_INDEX = {{ (((t.home + "search-index.json") | url) + "?v=" + build.stamp) | jsonify | safe }};
 </script>
 </head>
 <body>
-<a class="skip" href="#main">{{ t.navHome }}</a>
+<a class="skip" href="#main">{{ t.skipToContent }}</a>
 
 <header class="topbar">
   <a class="brand" href="{{ t.home }}">
@@ -83,6 +89,6 @@ window.SEARCH_INDEX = {{ ((t.home + "search-index.json") | url) | jsonify | safe
   </div>
 </div>
 
-<script src="/assets/app.js" defer></script>
+<script src="/assets/app.js?v={{ build.stamp }}" defer></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
 eleventyComputed:
   lang: "{{ loc.code }}"
   title: "{{ loc.allTitle }}"
-  altUrl: "{% if loc.code == 'en' %}/es/recipes/{% else %}/recipes/{% endif %}"
+  altUrl: "{{ i18n.strings[loc.other].home }}recipes/"
 ---
 {% set t = loc %}
 <div class="wrap">

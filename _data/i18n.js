@@ -18,6 +18,7 @@ const en = {
   navAll: "All recipes",
   navSource: "Source",
 
+  skipToContent: "Skip to content",
   searchOpen: "Search recipes",
   searchPlaceholder: "Search recipes, ingredients, tags…",
   searchClose: "Close",
@@ -90,6 +91,7 @@ const es = {
   navAll: "Todas las recetas",
   navSource: "Código",
 
+  skipToContent: "Saltar al contenido",
   searchOpen: "Buscar recetas",
   searchPlaceholder: "Busca recetas, ingredientes, etiquetas…",
   searchClose: "Cerrar",
