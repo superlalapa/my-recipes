@@ -174,7 +174,7 @@ npm run build     # production build into _site/
 npm run clean     # remove _site/
 ```
 
-Node 20 or newer.
+Node 20 or newer locally. CI builds on Node 24.
 
 ---
 
