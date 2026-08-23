@@ -1,0 +1,29 @@
+---
+title: "Batido blanco"
+description: "Manzana, plátano y yogur griego: el más suave del grupo y el más fácil de vender."
+date: 2026-08-23
+servings: 1
+prep: 5 min
+calories: "325"
+protein: "19 g"
+tags: [batido, plan-body-reset, yogur-griego, alto-en-proteina]
+sourceName: The Body Reset Diet
+---
+
+## Ingredientes
+
+- 1/2 taza de leche desnatada
+- 1 manzana
+- 1 plátano
+- 5 almendras crudas
+- 6 oz de yogur griego desnatado
+- Canela molida, al gusto
+- Extracto de vainilla, al gusto
+
+## Preparación
+
+1. Pon primero la base líquida en la licuadora: el líquido abajo evita que las cuchillas giren en vacío.
+2. Añade la fruta, el yogur o la proteína, y los frutos secos o semillas.
+3. Echa al final lo congelado y el hielo, para que queden encima.
+4. Licúa a máxima potencia 45–60 segundos, hasta que quede completamente liso.
+5. Aflójalo con un chorro más de líquido si está más espeso de lo que quieres.
