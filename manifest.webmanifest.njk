@@ -3,9 +3,9 @@ permalink: /manifest.webmanifest
 eleventyExcludeFromCollections: true
 ---
 {
-  "name": {{ site.title | jsonify | safe }},
-  "short_name": {{ site.title | jsonify | safe }},
-  "description": {{ site.description | jsonify | safe }},
+  "name": {{ i18n.strings.en.siteTitle | jsonify | safe }},
+  "short_name": {{ i18n.strings.en.siteTitle | jsonify | safe }},
+  "description": {{ i18n.strings.en.siteDescription | jsonify | safe }},
   "start_url": {{ ('/' | url) | jsonify | safe }},
   "scope": {{ ('/' | url) | jsonify | safe }},
   "display": "standalone",

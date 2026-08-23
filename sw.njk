@@ -9,14 +9,13 @@ const CACHE = "recipes-" + VERSION;
 const BASE = {{ ("/" | url) | jsonify | safe }};
 
 const PRECACHE = [
-  BASE,
-  BASE + "recipes/",
-  BASE + "es/",
-  BASE + "es/recipes/",
-  BASE + "assets/style.css",
-  BASE + "assets/app.js",
-  BASE + "search-index.json",
-  BASE + "es/search-index.json",
+{%- for l in i18n.list %}
+  BASE + {{ l.home.slice(1) | jsonify | safe }},
+  BASE + {{ (l.home.slice(1) + "recipes/") | jsonify | safe }},
+  BASE + {{ (l.home.slice(1) + "search-index.json?v=" + build.stamp) | jsonify | safe }},
+{%- endfor %}
+  BASE + {{ ("assets/style.css?v=" + build.stamp) | jsonify | safe }},
+  BASE + {{ ("assets/app.js?v=" + build.stamp) | jsonify | safe }},
   BASE + "404.html",
 ];
 
@@ -53,8 +52,10 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, copy));
+          if (response.ok && !response.redirected) {
+            const copy = response.clone();
+            caches.open(CACHE).then((cache) => cache.put(request, copy));
+          }
           return response;
         })
         .catch(() =>
@@ -69,7 +70,7 @@ self.addEventListener("fetch", (event) => {
       (hit) =>
         hit ||
         fetch(request).then((response) => {
-          if (response.ok) {
+          if (response.ok && !response.redirected) {
             const copy = response.clone();
             caches.open(CACHE).then((cache) => cache.put(request, copy));
           }

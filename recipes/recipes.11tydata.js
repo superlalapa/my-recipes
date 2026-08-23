@@ -10,8 +10,9 @@ import {
 export default {
   layout: "layouts/recipe.njk",
   eleventyComputed: {
-    // English at /recipes/…, Spanish at /es/recipes/…. Drafts stay visible in
-    // `npm run dev` for previewing but are never written by a production build.
+    // English at /recipes/…, Spanish at /es/recipes/…. A draft still gets a
+    // page in `npm run dev` (so you can open its URL directly) but is excluded
+    // from every listing and from search, and is never written by a build.
     permalink: (data) =>
       data.draft && process.env.ELEVENTY_RUN_MODE === "build"
         ? false
