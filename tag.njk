@@ -1,0 +1,31 @@
+---
+pagination:
+  data: collections.recipeTags
+  size: 1
+  alias: tag
+permalink: "{{ tag.url }}"
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  lang: "{{ tag.lang }}"
+  title: "{{ tag.name }}"
+  altUrl: "{{ tag.altUrl }}"
+---
+{% set t = i18n.strings[tag.lang] %}
+<div class="wrap">
+  <nav class="crumbs"><a href="{{ t.home }}">{{ t.backHome }}</a></nav>
+  <header class="page-head">
+    <h1>{{ t.tagTitle | fill(tag.name, "{tag}") }}</h1>
+    <p class="lede">{{ tag.count | count(t) }}</p>
+  </header>
+  <ul class="recipe-list">
+    {% for item in tag.recipes %}
+    <li>
+      <a href="{{ item.url }}">
+        <span class="r-title">{{ item.data.title }}{% if not item.translated %} <span class="badge">{{ item.contentLang | upper }}</span>{% endif %}</span>
+        <span class="r-meta">{{ t.categories[item.category] or (item.category | titleize) }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

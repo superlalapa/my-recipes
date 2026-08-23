@@ -1,0 +1,17 @@
+{
+  "name": "my-recipes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Superlalapa’s Recipes — a personal recipe collection published to GitHub Pages.",
+  "scripts": {
+    "prebuild": "node scripts/make-icons.mjs",
+    "build": "eleventy",
+    "dev": "node scripts/make-icons.mjs && eleventy --serve --port=${PORT:-8080}",
+    "clean": "rm -rf _site",
+    "new": "node scripts/new-recipe.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

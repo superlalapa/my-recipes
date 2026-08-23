@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+---
+{% set t = i18n.strings[lang or "en"] %}
+{% set catName = t.categories[category] or categoryName or (category | titleize) %}
+<article class="wrap recipe">
+
+  <nav class="crumbs">
+    <a href="{{ t.home }}recipes/{{ category }}/">← {{ catName }}</a>
+  </nav>
+
+  <header class="recipe-head">
+    <h1>{{ title }}</h1>
+    {% if description %}<p class="lede">{{ description }}</p>{% endif %}
+
+    {% if servings or prep or cook or total or difficulty or calories or protein %}
+    <dl class="facts">
+      {% if servings %}<div><dt>{{ t.factServes }}</dt><dd data-servings-readout>{{ servings }}</dd></div>{% endif %}
+      {% if prep %}<div><dt>{{ t.factPrep }}</dt><dd>{{ prep }}</dd></div>{% endif %}
+      {% if cook %}<div><dt>{{ t.factCook }}</dt><dd>{{ cook }}</dd></div>{% endif %}
+      {% if total %}<div><dt>{{ t.factTotal }}</dt><dd>{{ total }}</dd></div>{% endif %}
+      {% if difficulty %}<div><dt>{{ t.factLevel }}</dt><dd>{{ difficulty }}</dd></div>{% endif %}
+      {% if calories %}<div><dt>{{ t.factCalories }}</dt><dd>{{ calories }}</dd></div>{% endif %}
+      {% if protein %}<div><dt>{{ t.factProtein }}</dt><dd>{{ protein }}</dd></div>{% endif %}
+    </dl>
+    {% endif %}
+  </header>
+
+  {% if imageUrl %}
+  <img class="hero" src="{{ imageUrl }}" alt="{{ title }}" loading="lazy" decoding="async">
+  {% endif %}
+
+  <div class="cook-tools">
+    {% if servings %}
+    <div class="scaler" data-scaler data-base-servings="{{ servings }}">
+      <span class="scaler-label">{{ t.scaleLabel }}</span>
+      <button type="button" data-scale-down aria-label="{{ t.scaleDown }}">−</button>
+      <output data-scale-readout>1×</output>
+      <button type="button" data-scale-up aria-label="{{ t.scaleUp }}">+</button>
+    </div>
+    {% endif %}
+    <button type="button" class="chip" data-wakelock hidden aria-pressed="false">
+      <span aria-hidden="true">☀</span> {{ t.keepAwake }}
+    </button>
+    <button type="button" class="chip" data-reset-checks>{{ t.resetTicks }}</button>
+  </div>
+
+  <div class="recipe-body" data-recipe-body>
+    {{ content | safe }}
+  </div>
+
+  {% if tags and tags.length %}
+  <ul class="taglist">
+    {% for tag in tags %}
+    <li><a href="{{ t.home }}tags/{{ tag | tagSlug }}/">{{ tag }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <footer class="recipe-foot">
+    {% if source %}<p>{{ t.adaptedFrom }} <a href="{{ source }}" rel="noreferrer">{{ sourceName or source }}</a></p>
+    {% elif sourceName %}<p>{{ t.sourceFrom }} {{ sourceName }}</p>{% endif %}
+    <p><a href="{{ site.repo }}/edit/{{ site.repoBranch }}/{{ page.inputPath | replace('./', '') }}">{{ t.editOnGitHub }}</a></p>
+  </footer>
+</article>

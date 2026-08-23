@@ -1,0 +1,31 @@
+---
+pagination:
+  data: collections.categories
+  size: 1
+  alias: cat
+permalink: "{{ cat.url }}"
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  lang: "{{ cat.lang }}"
+  title: "{{ cat.name }}"
+  altUrl: "{{ cat.altUrl }}"
+---
+{% set t = i18n.strings[cat.lang] %}
+<div class="wrap">
+  <nav class="crumbs"><a href="{{ t.home }}">{{ t.backHome }}</a></nav>
+  <header class="page-head">
+    <h1><span aria-hidden="true">{{ cat.icon }}</span> {{ cat.name }}</h1>
+    <p class="lede">{{ cat.count | count(t) }}</p>
+  </header>
+  <ul class="recipe-list">
+    {% for item in cat.recipes %}
+    <li>
+      <a href="{{ item.url }}">
+        <span class="r-title">{{ item.data.title }}{% if not item.translated %} <span class="badge">{{ item.contentLang | upper }}</span>{% endif %}</span>
+        {% if item.data.description %}<span class="r-meta">{{ item.data.description | truncate(90) }}</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

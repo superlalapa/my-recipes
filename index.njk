@@ -1,0 +1,65 @@
+---
+pagination:
+  data: i18n.list
+  size: 1
+  alias: loc
+permalink: "{{ loc.home }}"
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  lang: "{{ loc.code }}"
+---
+{% set t = loc %}
+{% set recipes = collections.localeRecipes[t.code] %}
+{% set recent = collections.localeRecent[t.code] %}
+<div class="wrap">
+  <section class="hero">
+    <h1>{{ t.siteTitle }}</h1>
+    <p class="lede">{{ t.tagline }}</p>
+    <button type="button" class="fakefield" data-search-open>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      {{ t.searchCta | fill(recipes | length) }}
+    </button>
+  </section>
+
+  <section>
+    <h2 class="section-title">{{ t.homeCategories }}</h2>
+    <ul class="cat-grid">
+      {% for cat in collections.categories %}{% if cat.lang == t.code %}
+      <li>
+        <a href="{{ cat.url }}">
+          <span class="cat-icon" aria-hidden="true">{{ cat.icon }}</span>
+          <span class="cat-name">{{ cat.name }}</span>
+          <span class="cat-count">{{ cat.count | count(t) }}</span>
+        </a>
+      </li>
+      {% endif %}{% endfor %}
+    </ul>
+  </section>
+
+  {% if recent | length %}
+  <section>
+    <h2 class="section-title">{{ t.homeRecent }}</h2>
+    <ul class="recipe-list">
+      {% for item in recent.slice(0, 6) %}
+      <li>
+        <a href="{{ item.url }}">
+          <span class="r-title">{{ item.data.title }}{% if not item.translated %} <span class="badge">{{ item.contentLang | upper }}</span>{% endif %}</span>
+          <span class="r-meta">{{ t.categories[item.category] or (item.category | titleize) }}{% if item.data.total %} · {{ item.data.total }}{% elif item.data.cook %} · {{ item.data.cook }}{% endif %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="more"><a href="{{ t.home }}recipes/">{{ t.homeAllLink }}</a></p>
+  </section>
+  {% endif %}
+
+  <section>
+    <h2 class="section-title">{{ t.homeTags }}</h2>
+    <ul class="taglist">
+      {% for tag in collections.recipeTags %}{% if tag.lang == t.code %}
+      <li><a href="{{ tag.url }}">{{ tag.name }} <span>{{ tag.count }}</span></a></li>
+      {% endif %}{% endfor %}
+    </ul>
+  </section>
+</div>

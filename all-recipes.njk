@@ -1,0 +1,38 @@
+---
+pagination:
+  data: i18n.list
+  size: 1
+  alias: loc
+permalink: "{{ loc.home }}recipes/"
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  lang: "{{ loc.code }}"
+  title: "{{ loc.allTitle }}"
+  altUrl: "{% if loc.code == 'en' %}/es/recipes/{% else %}/recipes/{% endif %}"
+---
+{% set t = loc %}
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ t.allTitle }}</h1>
+    <p class="lede">{{ t.allCount | fill(collections.localeRecipes[t.code] | length) }}</p>
+  </header>
+
+  {% for cat in collections.categories %}{% if cat.lang == t.code %}
+  <section>
+    <h2 class="section-title">
+      <a href="{{ cat.url }}"><span aria-hidden="true">{{ cat.icon }}</span> {{ cat.name }}</a>
+    </h2>
+    <ul class="recipe-list">
+      {% for item in cat.recipes %}
+      <li>
+        <a href="{{ item.url }}">
+          <span class="r-title">{{ item.data.title }}{% if not item.translated %} <span class="badge">{{ item.contentLang | upper }}</span>{% endif %}</span>
+          {% if item.data.description %}<span class="r-meta">{{ item.data.description | truncate(90) }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}{% endfor %}
+</div>

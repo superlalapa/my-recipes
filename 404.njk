@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+eleventyExcludeFromCollections: true
+lang: en
+title: Not found
+---
+{% set en = i18n.strings.en %}
+{% set es = i18n.strings.es %}
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ en.notFoundTitle }}</h1>
+    <p class="lede">{{ en.notFoundLede }}</p>
+  </header>
+  <p class="more"><a href="{{ en.home }}">{{ en.notFoundBack }}</a></p>
+  <hr class="rule">
+  <header class="page-head" lang="es">
+    <h2>{{ es.notFoundTitle }}</h2>
+    <p class="lede">{{ es.notFoundLede }}</p>
+  </header>
+  <p class="more" lang="es"><a href="{{ es.home }}">{{ es.notFoundBack }}</a></p>
+</div>
